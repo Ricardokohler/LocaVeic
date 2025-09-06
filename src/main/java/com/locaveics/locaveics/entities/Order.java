@@ -29,6 +29,5 @@ public class Order {
     private Vehicle vehicle;
 
     @OneToOne
-    @JoinColumn(name = "rental_agent_id")
     private RentalAgent rentalAgent;
 }

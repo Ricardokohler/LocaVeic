@@ -7,6 +7,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "tb_rental_agents")
@@ -32,6 +34,6 @@ public class RentalAgent {
     }
 
     @JsonIgnore
-    @OneToOne(mappedBy = "rentalAgent")
-    private Order order;
+    @OneToMany(mappedBy = "rentalAgent")
+    private List <Order> order = new ArrayList<>();
 }
