@@ -1,0 +1,14 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/aula_cleanarch
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+
+
+  hibernate:
+    ddl-auto: update
+    show-sql: true
+    open-in-view: true
+
+  flyway: enabled=false
