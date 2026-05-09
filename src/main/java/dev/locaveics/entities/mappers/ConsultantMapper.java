@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class ConsultantMapper {
 
-    public Consultant map(ConsultantDto dto){
+    public static Consultant map(ConsultantDto dto){
         Consultant consultant = new Consultant();
 
         dto.setId(consultant.getId());
@@ -22,7 +22,7 @@ public class ConsultantMapper {
         return consultant;
     }
 
-    public ConsultantDto map(Consultant consultant){
+    public static ConsultantDto map(Consultant consultant){
         ConsultantDto dto = new ConsultantDto();
 
         consultant.setId(dto.getId());
