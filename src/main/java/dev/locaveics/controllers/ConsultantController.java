@@ -1,6 +1,7 @@
 package dev.locaveics.controllers;
 
 import dev.locaveics.entities.Consultant;
+import dev.locaveics.entities.dtos.ConsultantDto;
 import dev.locaveics.services.ConsultantService;
 import org.springframework.http.*;
 import org.springframework.stereotype.Controller;
@@ -21,16 +22,16 @@ public class ConsultantController {
 
     //create
     @PostMapping("/add")
-    public ResponseEntity<Consultant> create(@RequestBody Consultant consultant) {
-        Consultant createdConsultant = service.create(consultant);
+    public ResponseEntity<ConsultantDto> create(@RequestBody ConsultantDto consultant) {
+        ConsultantDto createdConsultant = service.create(consultant);
 
         return new ResponseEntity<>(createdConsultant, HttpStatus.CREATED);
     }
 
     //getAll
     @GetMapping("/all")
-    public ResponseEntity<List<Consultant>> getAll() {
-        List<Consultant> consultantList = service.getAll();
+    public ResponseEntity<List<ConsultantDto>> getAll() {
+        List<ConsultantDto> consultantList = service.getAll();
 
         return new ResponseEntity<>(consultantList, HttpStatus.OK);
     }

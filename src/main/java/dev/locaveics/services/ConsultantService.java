@@ -1,6 +1,8 @@
 package dev.locaveics.services;
 
 import dev.locaveics.entities.Consultant;
+import dev.locaveics.entities.dtos.ConsultantDto;
+import dev.locaveics.entities.mappers.ConsultantMapper;
 import dev.locaveics.repositories.ConsultantRepository;
 import org.springframework.stereotype.Service;
 
@@ -12,14 +14,20 @@ import java.util.Optional;
 public class ConsultantService {
 
     private final ConsultantRepository repository;
+    private final ConsultantMapper consultantMapper;
 
-    public ConsultantService(ConsultantRepository repository) {
+    public ConsultantService(ConsultantRepository repository, ConsultantMapper consultantMapper) {
         this.repository = repository;
+        this.consultantMapper = consultantMapper;
     }
 
     //create
-    public Consultant create(Consultant consultant){
-        return repository.save(consultant);
+    public ConsultantDto create(ConsultantDto consultantDto){
+        Consultant consultant = consultantMapper.map(consultantDto);
+
+        consultant = repository.save(consultant);
+        return consultantMapper.map(consultant);
+
     }
 
     //getAll
@@ -63,7 +71,6 @@ public class ConsultantService {
             return repository.save(newConsultant);
         } else throw new IOException("Id not found");
     }
-
 
     //deleteById
     public void deleteById(Long id){
