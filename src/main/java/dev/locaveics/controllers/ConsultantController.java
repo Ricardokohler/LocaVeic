@@ -1,6 +1,8 @@
 package dev.locaveics.controllers;
 
 import dev.locaveics.entities.Consultant;
+import dev.locaveics.entities.dtos.ConsultantDto;
+import dev.locaveics.entities.mappers.ConsultantMapper;
 import dev.locaveics.services.ConsultantService;
 import org.springframework.http.*;
 import org.springframework.stereotype.Controller;
@@ -8,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/consultant")
@@ -21,16 +24,16 @@ public class ConsultantController {
 
     //create
     @PostMapping("/add")
-    public ResponseEntity<Consultant> create(@RequestBody Consultant consultant) {
-        Consultant createdConsultant = service.create(consultant);
+    public ResponseEntity<ConsultantDto> create(@RequestBody ConsultantDto consultantDto) {
+        ConsultantDto createdConsultant = service.create(consultantDto);
 
         return new ResponseEntity<>(createdConsultant, HttpStatus.CREATED);
     }
 
     //getAll
     @GetMapping("/all")
-    public ResponseEntity<List<Consultant>> getAll() {
-        List<Consultant> consultantList = service.getAll();
+    public ResponseEntity<List<ConsultantDto>> getAll() {
+        List<ConsultantDto> consultantList = service.getAll();
 
         return new ResponseEntity<>(consultantList, HttpStatus.OK);
     }
@@ -38,79 +41,51 @@ public class ConsultantController {
     //getById
     @GetMapping("/{id}")
     public ResponseEntity<?> getById(@PathVariable Long id) {
-        Optional<Consultant> optionalConsultant = service.getById(id);
 
-        if (optionalConsultant.isPresent()) {
-            Consultant consultant = optionalConsultant.get();
+        ConsultantDto consultantDto = service.getById(id);
+        return new ResponseEntity<>(consultantDto, HttpStatus.OK);
 
-            return new ResponseEntity<>(consultant, HttpStatus.OK);
-        } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Id not found");
-        }
     }
 
     //getByFullName
     @GetMapping("/{name}")
     public ResponseEntity<?> getByFullName(@PathVariable String name) {
-        Optional<Consultant> optionalConsultant = service.getByFullName(name);
+        ConsultantDto consultantDto = service.getByFullName(name);
+        return new ResponseEntity<>(consultantDto, HttpStatus.OK);
 
-        if (optionalConsultant.isPresent()) {
-            Consultant consultant = optionalConsultant.get();
-
-            return new ResponseEntity<>(consultant, HttpStatus.OK);
-        } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Id not found");
-        }
     }
 
     //getByCpf
     @GetMapping("/{cpf}")
     public ResponseEntity<?> getByCpf(@PathVariable String cpf) {
-        Optional<Consultant> optionalConsultant = service.getByFullName(cpf);
+        ConsultantDto consultantDto = service.getByCpf(cpf);
+        return new ResponseEntity<>(consultantDto, HttpStatus.OK);
 
-        if (optionalConsultant.isPresent()) {
-            Consultant consultant = optionalConsultant.get();
-
-            return new ResponseEntity<>(consultant, HttpStatus.OK);
-        } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Id not found");
-        }
     }
 
     //getByEmail
     @GetMapping("/{email}")
     public ResponseEntity<?> getByEmail(@PathVariable String email) {
-        Optional<Consultant> optionalConsultant = service.getByFullName(email);
+        ConsultantDto consultantDto = service.getByEmail(email);
+        return new ResponseEntity<>(consultantDto, HttpStatus.OK);
 
-        if (optionalConsultant.isPresent()) {
-            Consultant consultant = optionalConsultant.get();
-
-            return new ResponseEntity<>(consultant, HttpStatus.OK);
-        } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Id not found");
-        }
     }
 
     //updateById
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateById(@PathVariable Long id, @RequestBody Consultant consultant) throws IOException {
-        Optional<Consultant> optionalConsultant = service.getById(id);
+    public ResponseEntity<?> updateById(@PathVariable Long id, @RequestBody ConsultantDto consultant) throws IOException {
+        ConsultantDto consultantDto = service.updateById(id, consultant);
 
-        if (optionalConsultant.isPresent()) {
-            Consultant updatedConsultant = service.updateById(id, consultant);
+        return new ResponseEntity<>(consultantDto, HttpStatus.OK);
 
-            return new ResponseEntity<>(updatedConsultant, HttpStatus.OK);
-        } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Id not found");
-        }
     }
 
     //deleteById
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteById(@PathVariable Long id) {
-        Optional<Consultant> optionalConsultant = service.getById(id);
+        ConsultantDto consultantDto = service.getById(id);
 
-        if(optionalConsultant.isPresent()){
+        if(consultantDto != null){
             service.deleteById(id);
 
             return ResponseEntity.status(HttpStatus.OK).body("Consultant Successfully deleted");
