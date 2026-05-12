@@ -7,8 +7,27 @@ import org.springframework.stereotype.Component;
 @Component
 public class ConsultantMapper {
 
+
     public static Consultant map(ConsultantDto dto){
+
         Consultant consultant = new Consultant();
+
+        if(dto.getId() != null){
+            consultant.setId(dto.getId());
+        }
+
+        consultant.setName(dto.getName());
+        consultant.setPhone(dto.getPhone());
+        consultant.setCpf(dto.getCpf());
+        consultant.setEmail(dto.getEmail());
+        consultant.setAddress(dto.getAddress());
+
+        return consultant;
+    }
+
+    public static ConsultantDto map(Consultant consultant){
+
+        ConsultantDto dto = new ConsultantDto();
 
         dto.setId(consultant.getId());
         dto.setName(consultant.getName());
@@ -17,23 +36,6 @@ public class ConsultantMapper {
         dto.setEmail(consultant.getEmail());
         dto.setAddress(consultant.getAddress());
 
-        dto.setOrderList(consultant.getOrderList());
-
-        return consultant;
-    }
-
-    public static ConsultantDto map(Consultant consultant){
-        ConsultantDto dto = new ConsultantDto();
-
-        consultant.setId(dto.getId());
-        consultant.setName(dto.getName());
-        consultant.setPhone(dto.getPhone());
-        consultant.setCpf(dto.getCpf());
-        consultant.setEmail(dto.getEmail());
-        consultant.setAddress(dto.getAddress());
-
         return dto;
-
     }
-
 }

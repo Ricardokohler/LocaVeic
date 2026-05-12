@@ -4,4 +4,4 @@ spring:
     name: locaveics
 
   profiles:
-    active: test
+    active: postgres

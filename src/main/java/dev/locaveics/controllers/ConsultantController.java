@@ -13,7 +13,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 @Controller
-@RequestMapping("/consultant")
+@RequestMapping("/consultants")
 public class ConsultantController {
 
     private final ConsultantService service;
@@ -24,73 +24,90 @@ public class ConsultantController {
 
     //create
     @PostMapping("/add")
-    public ResponseEntity<ConsultantDto> create(@RequestBody ConsultantDto consultantDto) {
+    public ResponseEntity<String> create(@RequestBody ConsultantDto consultantDto) {
         ConsultantDto createdConsultant = service.create(consultantDto);
 
-        return new ResponseEntity<>(createdConsultant, HttpStatus.CREATED);
+    return ResponseEntity.status(HttpStatus.CREATED).body("Consultant successfully created: " + createdConsultant);
     }
 
     //getAll
-    @GetMapping("/all")
+    @GetMapping("get/all")
     public ResponseEntity<List<ConsultantDto>> getAll() {
         List<ConsultantDto> consultantList = service.getAll();
 
-        return new ResponseEntity<>(consultantList, HttpStatus.OK);
+        return ResponseEntity.ok(consultantList);
     }
 
     //getById
-    @GetMapping("/{id}")
+    @GetMapping("/getById/{id}")
     public ResponseEntity<?> getById(@PathVariable Long id) {
 
         ConsultantDto consultantDto = service.getById(id);
-        return new ResponseEntity<>(consultantDto, HttpStatus.OK);
-
+        if(consultantDto != null){
+            return ResponseEntity.status(HttpStatus.OK).body(consultantDto);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Id not found: " + id);
+        }
     }
 
     //getByFullName
-    @GetMapping("/{name}")
+    @GetMapping("/getByFullName/{name}")
     public ResponseEntity<?> getByFullName(@PathVariable String name) {
-        ConsultantDto consultantDto = service.getByFullName(name);
-        return new ResponseEntity<>(consultantDto, HttpStatus.OK);
 
+        ConsultantDto consultantDto = service.getByFullName(name);
+        if(consultantDto != null){
+            return ResponseEntity.status(HttpStatus.OK).body(consultantDto);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Name not found: " + name);
+        }
     }
 
     //getByCpf
-    @GetMapping("/{cpf}")
+    @GetMapping("/getByCpf/{cpf}")
     public ResponseEntity<?> getByCpf(@PathVariable String cpf) {
-        ConsultantDto consultantDto = service.getByCpf(cpf);
-        return new ResponseEntity<>(consultantDto, HttpStatus.OK);
 
+        ConsultantDto consultantDto = service.getByCpf(cpf);
+        if(consultantDto != null){
+            return ResponseEntity.status(HttpStatus.OK).body(consultantDto);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Cpf not found: " + cpf);
+        }
     }
 
     //getByEmail
-    @GetMapping("/{email}")
+    @GetMapping("/getByEmail/{email}")
     public ResponseEntity<?> getByEmail(@PathVariable String email) {
         ConsultantDto consultantDto = service.getByEmail(email);
-        return new ResponseEntity<>(consultantDto, HttpStatus.OK);
-
+        if(consultantDto != null){
+            return ResponseEntity.status(HttpStatus.OK).body(consultantDto);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Email not found: " + email);
+        }
     }
 
     //updateById
-    @PutMapping("/{id}")
+    @PutMapping("/update/{id}")
     public ResponseEntity<?> updateById(@PathVariable Long id, @RequestBody ConsultantDto consultant) throws IOException {
         ConsultantDto consultantDto = service.updateById(id, consultant);
 
-        return new ResponseEntity<>(consultantDto, HttpStatus.OK);
-
+        if(consultantDto != null){
+            return ResponseEntity.status(HttpStatus.OK).body("Consultant successfully " + consultant);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Id not found");
+        }
     }
 
     //deleteById
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deleteById(@PathVariable Long id) {
         ConsultantDto consultantDto = service.getById(id);
 
         if(consultantDto != null){
             service.deleteById(id);
 
-            return ResponseEntity.status(HttpStatus.OK).body("Consultant Successfully deleted");
+            return ResponseEntity.status(HttpStatus.OK).body("Consultant Successfully deleted: Id " + consultantDto.getId());
         } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Id not found");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Id not found: " + id);
         }
     }
 }

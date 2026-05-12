@@ -1,11 +1,14 @@
 package dev.locaveics.entities;
 
+import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import lombok.Getter;
 
 import java.util.List;
 
+@Getter
 @Entity
 @Table(name = "tb_consultants")
 public class Consultant extends Person{
@@ -20,7 +23,5 @@ public class Consultant extends Person{
         super(id, name, phone, cpf, email, address);
     }
 
-    public List<Order> getOrderList() {
-        return orderList;
-    }
+
 }

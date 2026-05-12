@@ -13,6 +13,9 @@ public class Vehicle {
 
     private String model;
     private String brand;
+    //CHASSI
+    //VALUEPERHOUR
+
 
     @OneToMany(mappedBy = "vehicle")
     private List<Order> orderList;
