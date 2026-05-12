@@ -46,26 +46,26 @@ public class ClientService {
 
     }
 
-        //getByFullName
-        public ClientDto getByFullName(String name){
-            Optional<Client> optionalClient = repository.findByName(name);
+    //getByFullName
+    public ClientDto getByFullName(String name){
+        Optional<Client> optionalClient = repository.findByName(name);
 
-            return optionalClient.map(ClientMapper::map).orElse(null);
-        }
+        return optionalClient.map(ClientMapper::map).orElse(null);
+    }
 
-        //getByCpf
-        public ClientDto getByCpf(String cpf){
-            Optional<Client> optionalClient = repository.findByCpf(cpf);
+    //getByCpf
+    public ClientDto getByCpf(String cpf){
+        Optional<Client> optionalClient = repository.findByCpf(cpf);
 
-            return optionalClient.map(ClientMapper::map).orElse(null);
-        }
+        return optionalClient.map(ClientMapper::map).orElse(null);
+    }
 
-        //getByEmail
-        public ClientDto getByEmail(String email){
-            Optional<Client> optionalClient = repository.findByEmail(email);
+    //getByEmail
+    public ClientDto getByEmail(String email){
+        Optional<Client> optionalClient = repository.findByEmail(email);
 
-            return optionalClient.map(ClientMapper::map).orElse(null);
-        }
+        return optionalClient.map(ClientMapper::map).orElse(null);
+    }
 
     //updateById
     public ClientDto updateById(Long id, ClientDto Client) throws IOException {

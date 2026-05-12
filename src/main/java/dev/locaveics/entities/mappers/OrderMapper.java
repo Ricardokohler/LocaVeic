@@ -5,7 +5,8 @@ import dev.locaveics.entities.dtos.OrderDto;
 
 public class OrderMapper {
 
-    public OrderDto map(Order order){
+
+    public static OrderDto map(Order order){
 
         OrderDto dto = new OrderDto();
 
@@ -26,7 +27,7 @@ public class OrderMapper {
         return dto;
     }
 
-    public Order map(OrderDto dto){
+    public static Order map(OrderDto dto){
         Order order = new Order();
 
         order.setId(dto.getId());

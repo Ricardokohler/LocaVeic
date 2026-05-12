@@ -24,6 +24,7 @@ public class VehicleMapper {
 
         VehicleDto dto = new VehicleDto();
 
+        dto.setId(vehicle.getId());
         dto.setModel(vehicle.getModel());
         dto.setBrand(vehicle.getBrand());
 

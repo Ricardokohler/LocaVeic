@@ -5,13 +5,11 @@ import dev.locaveics.entities.dtos.ManagerDto;
 
 public class ManagerMapper {
 
-    public ManagerDto map(Manager manager){
+    public static ManagerDto map(Manager manager){
         ManagerDto dto = new ManagerDto();
 
-        if(dto.getId() != null){
-            dto.setId(manager.getId());
-        }
 
+        dto.setId(manager.getId());
         dto.setName(manager.getName());
         dto.setPhone(manager.getPhone());
         dto.setCpf(manager.getCpf());
@@ -21,8 +19,12 @@ public class ManagerMapper {
         return dto;
     }
 
-    public Manager map(ManagerDto dto){
+    public static Manager map(ManagerDto dto){
         Manager manager = new Manager();
+
+        if(dto.getId() != null){
+            manager.setId(dto.getId());
+        }
 
         manager.setId(dto.getId());
         manager.setName(dto.getName());

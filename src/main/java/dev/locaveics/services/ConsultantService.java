@@ -46,26 +46,26 @@ public class ConsultantService {
 
     }
 
-        //getByFullName
-        public ConsultantDto getByFullName(String name){
-            Optional<Consultant> optionalConsultant = repository.findByName(name);
+    //getByFullName
+    public ConsultantDto getByFullName(String name){
+        Optional<Consultant> optionalConsultant = repository.findByName(name);
 
-            return optionalConsultant.map(ConsultantMapper::map).orElse(null);
-        }
+        return optionalConsultant.map(ConsultantMapper::map).orElse(null);
+    }
 
-        //getByCpf
-        public ConsultantDto getByCpf(String cpf){
-            Optional<Consultant> optionalConsultant = repository.findByCpf(cpf);
+    //getByCpf
+    public ConsultantDto getByCpf(String cpf){
+        Optional<Consultant> optionalConsultant = repository.findByCpf(cpf);
 
-            return optionalConsultant.map(ConsultantMapper::map).orElse(null);
-        }
+        return optionalConsultant.map(ConsultantMapper::map).orElse(null);
+    }
 
-        //getByEmail
-        public ConsultantDto getByEmail(String email){
-            Optional<Consultant> optionalConsultant = repository.findByEmail(email);
+    //getByEmail
+    public ConsultantDto getByEmail(String email){
+        Optional<Consultant> optionalConsultant = repository.findByEmail(email);
 
-            return optionalConsultant.map(ConsultantMapper::map).orElse(null);
-        }
+        return optionalConsultant.map(ConsultantMapper::map).orElse(null);
+    }
 
     //updateById
     public ConsultantDto updateById(Long id, ConsultantDto consultant) throws IOException {

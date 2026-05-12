@@ -8,10 +8,4 @@ import java.util.Optional;
 
 public interface VehicleRepository extends JpaRepository<Vehicle, Long> {
 
-    public Optional<Vehicle> findByName(String name);
-
-    public Optional<Vehicle> findByCpf(String cpf);
-
-    public Optional<Vehicle> findByEmail(String email);
-
 }
