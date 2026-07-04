@@ -20,12 +20,13 @@ public class ClientController {
         this.service = service;
     }
 
+
     //create
     @PostMapping("/add")
     public ResponseEntity<String> create(@RequestBody ClientDto clientDto) {
         ClientDto createdClient = service.create(clientDto);
 
-    return ResponseEntity.status(HttpStatus.CREATED).body("Client successfully created: " + createdClient);
+        return ResponseEntity.status(HttpStatus.CREATED).body("Client successfully created: " + createdClient);
     }
 
     //getAll
@@ -98,12 +99,12 @@ public class ClientController {
     //deleteById
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deleteById(@PathVariable Long id) {
-        ClientDto clientDto = service.getById(id);
+        ClientDto deletedClient = service.getById(id);
 
-        if(clientDto != null){
+        if(deletedClient != null){
             service.deleteById(id);
 
-            return ResponseEntity.status(HttpStatus.OK).body("Client Successfully deleted: Id " + clientDto.getId());
+            return ResponseEntity.status(HttpStatus.OK).body("Client Successfully deleted: Id " + deletedClient.getId());
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Id not found: " + id);
         }

@@ -19,13 +19,15 @@ public class VehicleService {
         this.repository= repository;
     }
 
+
     //create
     public VehicleDto create(VehicleDto vehicleDto){
-        Vehicle vehicle = VehicleMapper.map(vehicleDto);
-        Vehicle createdVehicle = repository.save(vehicle);
+        Vehicle createdVehicle = VehicleMapper.map(vehicleDto);
+        createdVehicle = repository.save(createdVehicle);
 
         return VehicleMapper.map(createdVehicle);
     }
+
 
     //getAll
     public List<VehicleDto> getAll(){
@@ -36,6 +38,7 @@ public class VehicleService {
                 .collect(Collectors.toList());
     }
 
+
     //getById
     public VehicleDto getById(Long id){
 
@@ -43,6 +46,7 @@ public class VehicleService {
 
         return optionalVehicle.map(VehicleMapper::map).orElse(null);
     }
+
 
     //updateById
     public VehicleDto updateById(Long id, VehicleDto vehicleDto){
@@ -57,6 +61,7 @@ public class VehicleService {
             return VehicleMapper.map(newVehicle);
         } else throw new RuntimeException("Id not found");
     }
+
 
     //deleteById
     public void deleteById(Long id){

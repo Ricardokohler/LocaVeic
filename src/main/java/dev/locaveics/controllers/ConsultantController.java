@@ -100,12 +100,12 @@ public class ConsultantController {
     //deleteById
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deleteById(@PathVariable Long id) {
-        ConsultantDto consultantDto = service.getById(id);
+        ConsultantDto deletedClient = service.getById(id);
 
-        if(consultantDto != null){
+        if(deletedClient != null){
             service.deleteById(id);
 
-            return ResponseEntity.status(HttpStatus.OK).body("Consultant Successfully deleted: Id " + consultantDto.getId());
+            return ResponseEntity.status(HttpStatus.OK).body("Consultant Successfully deleted: Id " + deletedClient.getId());
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Id not found: " + id);
         }

@@ -21,14 +21,16 @@ public class ConsultantService {
         this.repository = repository;
     }
 
+
     //create
     public ConsultantDto create(ConsultantDto consultantDto){
-        Consultant consultant = ConsultantMapper.map(consultantDto);
+        Consultant createdConsultant = ConsultantMapper.map(consultantDto);
 
-        consultant = repository.save(consultant);
-        return ConsultantMapper.map(consultant);
+        createdConsultant = repository.save(createdConsultant);
+        return ConsultantMapper.map(createdConsultant);
 
     }
+
 
     //getAll
     public List<ConsultantDto> getAll(){
@@ -38,13 +40,14 @@ public class ConsultantService {
                 .collect(Collectors.toList());
     }
 
+
     //getById
     public ConsultantDto getById(Long id){
         Optional<Consultant> optionalConsultant = repository.findById(id);
 
         return optionalConsultant.map(ConsultantMapper::map).orElse(null);
-
     }
+
 
     //getByFullName
     public ConsultantDto getByFullName(String name){
@@ -53,12 +56,14 @@ public class ConsultantService {
         return optionalConsultant.map(ConsultantMapper::map).orElse(null);
     }
 
+
     //getByCpf
     public ConsultantDto getByCpf(String cpf){
         Optional<Consultant> optionalConsultant = repository.findByCpf(cpf);
 
         return optionalConsultant.map(ConsultantMapper::map).orElse(null);
     }
+
 
     //getByEmail
     public ConsultantDto getByEmail(String email){
@@ -67,12 +72,13 @@ public class ConsultantService {
         return optionalConsultant.map(ConsultantMapper::map).orElse(null);
     }
 
+
     //updateById
-    public ConsultantDto updateById(Long id, ConsultantDto consultant) throws IOException {
+    public ConsultantDto updateById(Long id, ConsultantDto consultantDto) throws IOException {
         Optional<Consultant> oldConsultant = repository.findById(id);
 
         if(oldConsultant.isPresent()){
-            Consultant newConsultant = ConsultantMapper.map(consultant);
+            Consultant newConsultant = ConsultantMapper.map(consultantDto);
             newConsultant.setId(id);
             repository.save(newConsultant);
             return ConsultantMapper.map(newConsultant);

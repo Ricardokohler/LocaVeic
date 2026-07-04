@@ -21,14 +21,16 @@ public class ClientService {
         this.repository = repository;
     }
 
+
     //create
     public ClientDto create(ClientDto clientDto){
-        Client client = ClientMapper.map(clientDto);
+        Client createdClient = ClientMapper.map(clientDto);
 
-        client = repository.save(client);
-        return ClientMapper.map(client);
+        createdClient = repository.save(createdClient);
+        return ClientMapper.map(createdClient);
 
     }
+
 
     //getAll
     public List<ClientDto> getAll(){
@@ -38,12 +40,12 @@ public class ClientService {
                 .collect(Collectors.toList());
     }
 
+
     //getById
     public ClientDto getById(Long id){
         Optional<Client> optionalClient = repository.findById(id);
 
         return optionalClient.map(ClientMapper::map).orElse(null);
-
     }
 
     //getByFullName
@@ -68,11 +70,11 @@ public class ClientService {
     }
 
     //updateById
-    public ClientDto updateById(Long id, ClientDto Client) throws IOException {
+    public ClientDto updateById(Long id, ClientDto clientDto) throws IOException {
         Optional<Client> oldClient = repository.findById(id);
 
         if(oldClient.isPresent()){
-            Client newClient = ClientMapper.map(Client);
+            Client newClient = ClientMapper.map(clientDto);
             newClient.setId(id);
             repository.save(newClient);
             return ClientMapper.map(newClient);
