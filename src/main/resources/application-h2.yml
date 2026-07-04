@@ -9,10 +9,11 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
-      show-sql: true
+    show-sql: true
 
   h2:
-    console-enabled: true
+    console:
+      enabled: true
 
   flyway:
     enabled: false
