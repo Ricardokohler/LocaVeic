@@ -1,6 +1,10 @@
 spring:
   datasource:
-    url:  jdbc:postgresql://host.docker.internal:5432/db_rentaveic
+    # Desenvolvimento local (Linux)
+    url: jdbc:postgresql://localhost:5432/db_locaveics
+
+    # Docker
+    # url: jdbc:postgresql://host.docker.internal:5432/db_locaveics
     username: postgres
     password: postgres
     driver-class-name: org.postgresql.Driver
